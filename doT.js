@@ -130,6 +130,7 @@
 			return new Function(c.varname, str);
 		} catch (e) {
 			if (typeof console !== "undefined") console.log("Could not create a template function: " + str);
+			e.__failedSource = str;
 			throw e;
 		}
 	};
