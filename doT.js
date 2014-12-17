@@ -21,6 +21,7 @@
 			strip:		true,
 			append:		true,
 			selfcontained: false,
+			assumeGlobalEncoder: false,
 			doNotSkipEncoded: false
 		},
 		template: undefined, //fn, compile template
@@ -120,7 +121,7 @@
 			.replace(/(\s|;|\}|^|\{)out\+='';/g, '$1').replace(/\+''/g, "");
 			//.replace(/(\s|;|\}|^|\{)out\+=''\+/g,'$1out+=');
 
-		if (needhtmlencode) {
+		if (needhtmlencode && !c.assumeGlobalEncoder) {
 			if (!c.selfcontained && _globals && !_globals._encodeHTML) _globals._encodeHTML = doT.encodeHTMLSource(c.doNotSkipEncoded);
 			str = "var encodeHTML = typeof _encodeHTML !== 'undefined' ? _encodeHTML : ("
 				+ doT.encodeHTMLSource.toString() + "(" + (c.doNotSkipEncoded || '') + "));"
